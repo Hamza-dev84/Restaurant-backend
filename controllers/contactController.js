@@ -1,28 +1,32 @@
 
 const Contact = require("../models/Contact");
+const sendSuccess = require("../utilities/responseHandler");
 
-exports.sendMessage = async (req, res) => {
+const sendMessage = async (req, res, next) => {
     try {
         const { name, email, subject, message } = req.body;
 
-        // if (!name || !email || !subject || !message) {
-        //     return res.status(400).json({status:'fail', message: "All fields are required" });
-        // }
-
         const newMessage = await Contact.create({ name, email, subject, message });
 
-        res.status(201).json({ status: "success", message: "Message sent successfully", data: newMessage });
+        
+        sendSuccess({ res, data: newMessage, message: "Message Sent Successfully" });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: error.message });
+        next(error);
     }
 }
 
-exports.getMessage = async (req, res) => {
+const getMessage = async (req, res, next) => {
     try {
         const messages = await Contact.find().sort({ createdAt: -1 });
-        res.status(200).json(messages);
+        
+        sendSuccess({res, data: messages});
     } catch (error) {
-        res.status(500).json({ message: error.message });
+
+        next(error);
+
     }
+}
+
+module.exports = {
+    sendMessage, getMessage
 }
