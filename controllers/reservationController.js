@@ -1,35 +1,30 @@
 
 const Reservation = require("../models/Reservation");
 const sendSuccess = require("../utilities/responseHandler");
+const asyncWrapper = require("../utilities/asyncWrapper");
 
-const createReservation = async (req, res, next) => {
-    try {
-        console.log(req);
-        const { name, email, phone, date, time, persons } = req.body;
+const createReservation = asyncWrapper(async (req, res) => {
 
-        const reservation = await Reservation.create({
-            name, email, phone, date, time, persons
-        })
+    const { name, email, phone, date, time, persons } = req.body;
 
-        sendSuccess({ res, data: reservation, message: "Reservation Successful" });
-    } catch (error) {
-    
-        next(error);
-    }
+    const reservation = await Reservation.create({
+        name, email, phone, date, time, persons
+    })
 
-}
+    sendSuccess({ res, data: reservation, message: "Reservation Successful" });
 
-const getReservations = async (req, res, next) => {
-    try {
+
+})
+
+const getReservations = asyncWrapper( async (req, res) => {
+   
         const reservations = await Reservation
             .find()
             .sort({ createdAt: -1 });
 
         sendSuccess({ res, data: reservations });
-    } catch (error) {
-        next(error);
-    }
-}
+    
+})
 
 module.exports = {
     createReservation, getReservations

@@ -1,29 +1,24 @@
 
 const Menu = require("../models/Menu");
-const sendSuccess = require("../utilities/responseHandler")
+const sendSuccess = require("../utilities/responseHandler");
+const asyncWrapper = require("../utilities/asyncWrapper");
 
-const createMenuItem = async (req, res, next) => {
+const createMenuItem = asyncWrapper(async (req, res) => {
 
-    try {
-        const items = await Menu.create(req.body);
+    const items = await Menu.create(req.body);
 
-        sendSuccess({res, data:items});
-    } catch (error) {
-        next(error);
-    }
+    sendSuccess({ res, data: items });
 
-}
 
-const getMenuItems = async (req, res, next) => {
+})
 
-    try {
+const getMenuItems = asyncWrapper( async (req, res) => {
+
         const items = await Menu.find();
-        
-        sendSuccess({res, data:items});
-    } catch (error) {
-        next(error);
-    }
 
-}
+        sendSuccess({ res, data: items });
+    
+
+})
 
 module.exports = { createMenuItem, getMenuItems };
