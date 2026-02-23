@@ -7,12 +7,11 @@ const reservationRoutes = require("./routes/reservationRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const errorHandler = require("./middleware/errorHandlerMiddleware");
+const connectToDB = require("./config/db");
 
 const app = express();
 
-mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("MongoDB Connected"))
-    .catch((err) => console.log(err));
+connectToDB();
 
 app.use(cors());
 app.use(express.json());
@@ -24,7 +23,7 @@ app.use("/api/menu", menuRoutes);
 
 app.use(errorHandler);
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, "0.0.0.0",() => {
     console.log(`Server Running or PORT ${process.env.PORT}`);
 })
 

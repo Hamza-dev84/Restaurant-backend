@@ -21,6 +21,6 @@ const menuSchema = new mongoose.Schema({
         type: String,
         required: [true, "Category is required"]
     }
-}, );
+}, { timestamps: true });
 
 module.exports = mongoose.model("Menu", menuSchema);

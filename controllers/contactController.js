@@ -1,24 +1,11 @@
 
 const Contact = require("../models/Contact");
-const sendSuccess = require("../utilities/responseHandler");
-const asyncWrapper = require("../utilities/asyncWrapper");
+const { createService, getAllService } = require("../services/dbService");
 
-const sendMessage = asyncWrapper(async (req, res) => {
-    const { name, email, subject, message } = req.body;
-
-    const newMessage = await Contact.create({ name, email, subject, message });
-
-    sendSuccess({ res, data: newMessage, message: "Message Sent Successfully" });
-})
-
-const getMessage = asyncWrapper(async (req, res) => {
-
-    const messages = await Contact.find().sort({ createdAt: -1 });
-
-    sendSuccess({ res, data: messages });
-
-})
+const sendMessage = createService(Contact, "Message Sent Successfully");
+const getMessage = getAllService(Contact);
 
 module.exports = {
-    sendMessage, getMessage
+    sendMessage,
+    getMessage
 }

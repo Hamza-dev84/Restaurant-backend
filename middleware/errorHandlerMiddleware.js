@@ -1,6 +1,9 @@
 
-const errorHandler = ((req, res, next) => {
-    res.status(500).json({ staus: "Fail", message: error.message });
-})
+const errorHandler = (err, req, res, next) => {
+    res.status(err.statusCode || 500).json({
+        status: "Fail",
+        message: err.message || "Internal Server Error"
+    });
+};
 
 module.exports = errorHandler;

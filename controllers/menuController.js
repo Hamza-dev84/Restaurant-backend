@@ -1,24 +1,10 @@
 
 const Menu = require("../models/Menu");
-const sendSuccess = require("../utilities/responseHandler");
-const asyncWrapper = require("../utilities/asyncWrapper");
+const { createService, getAllService } = require("../services/dbService");
 
-const createMenuItem = asyncWrapper(async (req, res) => {
+const createMenuItem = createService(Menu, "Menu Item Created");
+const getMenuItems = getAllService(Menu);
 
-    const items = await Menu.create(req.body);
-
-    sendSuccess({ res, data: items });
-
-
-})
-
-const getMenuItems = asyncWrapper( async (req, res) => {
-
-        const items = await Menu.find();
-
-        sendSuccess({ res, data: items });
-    
-
-})
-
-module.exports = { createMenuItem, getMenuItems };
+module.exports = {
+    createMenuItem, getMenuItems
+}

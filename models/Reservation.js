@@ -28,6 +28,6 @@ const reservationSchema = new mongoose.Schema({
         required: [true, "Persons information is required"]
     },
 
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("Reservation", reservationSchema);
