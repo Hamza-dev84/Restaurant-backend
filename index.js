@@ -6,7 +6,8 @@ const cors = require("cors");
 const reservationRoutes = require("./routes/reservationRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const menuRoutes = require("./routes/menuRoutes");
-const descMenuRoutes = require("./routes/descMenuRoutes")
+const descMenuRoutes = require("./routes/descMenuRoutes");
+const orderRoutes = require("./routes/orderRoutes");
 const errorHandler = require("./middleware/errorHandlerMiddleware");
 const connectToDB = require("./config/db");
 
@@ -22,6 +23,7 @@ app.use("/api/reservations", reservationRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/descmenu", descMenuRoutes);
+app.use("/api/orders", orderRoutes);
 
 app.use(errorHandler);
 
