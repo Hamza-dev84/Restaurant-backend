@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
 
-    // 1. Customer Details
+    
     customer: {
         name: { type: String, required: true },
         email: { type: String, required: true },
@@ -11,17 +11,15 @@ const orderSchema = new mongoose.Schema({
         address: { type: String, required: true },
     },
 
-    // 2. The Cart Items (Array)
+    
     orderItems: [{
 
         name: { type: String, required: true },
         quantity: { type: Number, required: true, min: 1 },
         price: { type: Number, required: true },
-        // currency: { type: String }
-
     }],
 
-    // 3. Financials
+    
 
     financials: {
         itemsTotal: { type: Number, required: true },
@@ -30,15 +28,6 @@ const orderSchema = new mongoose.Schema({
         currency: { type: String, default: "$" }
     },
 
-
-//     financials: {
-//     itemsTotal: { type: String, required: true },
-//     deliveryFee: { type: String, default: "0$" },
-//     grandTotal: { type: String, required: true },
-// },
-
-
-    // 5. Payment Details
     payment: {
         type: String
     }
