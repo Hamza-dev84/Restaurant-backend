@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
 
-    
+
     customer: {
         name: { type: String, required: true },
         email: { type: String, required: true },
@@ -11,7 +11,7 @@ const orderSchema = new mongoose.Schema({
         address: { type: String, required: true },
     },
 
-    
+
     orderItems: [{
 
         name: { type: String, required: true },
@@ -19,7 +19,6 @@ const orderSchema = new mongoose.Schema({
         price: { type: Number, required: true },
     }],
 
-    
 
     financials: {
         itemsTotal: { type: Number, required: true },
@@ -30,7 +29,13 @@ const orderSchema = new mongoose.Schema({
 
     payment: {
         type: String
-    }
+    },
+
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
 
 }, {
     timestamps: true

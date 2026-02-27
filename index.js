@@ -8,6 +8,7 @@ const contactRoutes = require("./routes/contactRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const descMenuRoutes = require("./routes/descMenuRoutes");
 const orderRoutes = require("./routes/orderRoutes");
+const authRoutes = require("./routes/authRoutes");
 const errorHandler = require("./middleware/errorHandlerMiddleware");
 const connectToDB = require("./config/db");
 
@@ -24,6 +25,7 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/menu", menuRoutes);
 app.use("/api/descmenu", descMenuRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/auth", authRoutes);
 
 app.use(errorHandler);
 
