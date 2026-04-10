@@ -1,12 +1,4 @@
 
-// const Order = require("../models/Order");
-// const { createService } = require("../services/dbService");
-
-// const createOrder = createService(Order, "Order Created Successfully");
-
-
-
-
 const asyncWrapper = require("../utilities/asyncWrapper");
 const Order = require("../models/Order");
 const sendSuccess = require("../utilities/responseHandler");
